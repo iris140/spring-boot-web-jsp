@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<decorators defaultdir="/decorators">
+
+    <!-- =========================
+         LOGIN
+         ========================= -->
+
+    <decorator name="login"
+               page="login.jsp">
+
+        <pattern>/login</pattern>
+
+    </decorator>
+
+
+    <!-- =========================
+         ADMIN
+         ========================= -->
+
+    <decorator name="admin"
+               page="admin.jsp">
+
+        <pattern>/admin</pattern>
+        <pattern>/admin/*</pattern>
+
+    </decorator>
+
+
+    <!-- =========================
+         WEBSITE
+         ========================= -->
+
+    <decorator name="web"
+               page="web.jsp">
+
+        <pattern>/</pattern>
+        <pattern>/trang-chu</pattern>
+
+    </decorator>
+
+</decorators>
