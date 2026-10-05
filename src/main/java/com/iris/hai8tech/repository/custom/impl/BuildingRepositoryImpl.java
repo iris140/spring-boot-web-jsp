@@ -187,6 +187,7 @@ public class BuildingRepositoryImpl implements BuildingRepositoryCustom {
             where.append(" AND EXISTS (SELECT * FROM rentarea r WHERE b.id = r.buildingid ");
 
             if (rentAreaFrom != null) {
+
                 where.append(" AND r.value >= " + rentAreaFrom);
             }
             if (rentAreaTo != null) {

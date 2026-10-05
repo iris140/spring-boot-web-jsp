@@ -1,5 +1,6 @@
 package com.iris.hai8tech.service;
 
+import com.iris.hai8tech.entity.BuildingEntity;
 import com.iris.hai8tech.model.dto.BuildingDTO;
 import com.iris.hai8tech.model.request.BuildingSearchRequest;
 import com.iris.hai8tech.model.response.BuildingSearchResponse;
@@ -10,8 +11,6 @@ import java.util.List;
 
 public interface BuildingService {
 
-    List<BuildingSearchResponse> findAll(BuildingSearchResponse buildingSearchReponse, Pageable pageable);
-
     List<BuildingSearchResponse> findAll(BuildingSearchRequest buildingSearchRequest, Pageable pageable);
 
     ResponseDTO listStaffs(Long buildingId);
@@ -20,7 +19,7 @@ public interface BuildingService {
 
     BuildingDTO addOrUpdateBuilding(BuildingDTO buildingDTO);
 
-    BuildingDTO findById(Long id);
+    BuildingEntity findById(Long id);
 
     int countTotalItem(List<BuildingSearchResponse> list);
 
