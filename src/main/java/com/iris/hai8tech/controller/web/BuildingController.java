@@ -5,6 +5,7 @@ import com.iris.hai8tech.enums.District;
 import com.iris.hai8tech.enums.TypeCode;
 import com.iris.hai8tech.model.dto.BuildingDTO;
 import com.iris.hai8tech.model.request.BuildingSearchRequest;
+import com.iris.hai8tech.model.response.BuildingEditResponse;
 import com.iris.hai8tech.model.response.BuildingSearchResponse;
 import com.iris.hai8tech.service.BuildingService;
 import com.iris.hai8tech.service.UserService;
@@ -84,16 +85,15 @@ public class BuildingController {
     }
 
     @GetMapping("/admin/building-edit-{id}")// ModelAttribute nếu href 3 cấp là k nhận
-    public ModelAndView buildingEdit(@PathVariable("id") Long Id, HttpServletRequest request) {
+    public ModelAndView buildingEdit(@PathVariable("id") Long id, HttpServletRequest request) {
         ModelAndView mav = new ModelAndView("admin/building/edit");
 
-        BuildingEntity buildingEntity = buildingService.findById(Id);
+        BuildingEditResponse building =
+                buildingService.findById(id);
 
-//        List<BuildingDTO> reponseList = new ArrayList<>();
-//        reponseList.add(buildingDTO);
         mav.addObject("districts", District.dicstrictMap());
         mav.addObject("typeCodes", TypeCode.typeCodeMap());
-        mav.addObject("buildingEdit", buildingEntity);
+        mav.addObject("buildingEdit", building);
         return mav;
     }
 }

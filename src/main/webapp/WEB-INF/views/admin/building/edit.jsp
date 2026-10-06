@@ -489,7 +489,7 @@
                                 Hạng
                             </label>
                             <form:input class="form-control"
-                                        path="buildingRank"/>
+                                        path="level"/>
 
                         </div>
 
@@ -510,12 +510,12 @@
                                 Diện tích thuê
                             </label>
                             <form:input class="form-control"
-                                        path="rentAreaEntities"/>
-                            <input type="text"
+                                        path="rentArea"/>
+                            <!-- <input type="text"
                                    id="rentArea"
                                    name="rentArea"
                                    class="form-control"
-                                   value="">
+                                   value=""> -->
 
                         </div>
 
@@ -545,7 +545,7 @@
                         Mô tả giá
                     </label>
                     <form:input class="form-control"
-                                path="priceDescription"/>
+                                path="rentPriceDescription"/>
 
                 </div>
 
@@ -736,11 +736,11 @@
 
                         <div class="form-group">
 
-                            <label for="leaseTerm">
+                            <label for="rentTime">
                                 Thời hạn thuê
                             </label>
                             <form:input class="form-control"
-                                        path="leaseTerm"/>
+                                        path="rentTime"/>
 
                         </div>
 
