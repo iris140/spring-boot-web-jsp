@@ -30,7 +30,7 @@ public class BuildingEntity {
     private String structure;
 
     @Column(name = "numberofbasement")
-    private Integer numberOfBasement;
+    private Long numberOfBasement;
 
     @Column(name = "floorarea")
     private BigDecimal floorArea;
@@ -88,7 +88,7 @@ public class BuildingEntity {
 
     private String note;
 
-    @OneToMany(mappedBy = "building", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "building", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true)
     private List<RentAreaEntity> rentAreaEntities = new ArrayList<>();
 
     public List<RentAreaEntity> getRentAreaEntities() {
@@ -204,11 +204,11 @@ public class BuildingEntity {
         this.structure = structure;
     }
 
-    public Integer getNumberOfBasement() {
+    public Long getNumberOfBasement() {
         return numberOfBasement;
     }
 
-    public void setNumberOfBasement(Integer numberOfBasement) {
+    public void setNumberOfBasement(Long numberOfBasement) {
         this.numberOfBasement = numberOfBasement;
     }
 

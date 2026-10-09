@@ -1,5 +1,6 @@
 package com.iris.hai8tech.controller.web;
 
+import com.iris.hai8tech.entity.BuildingEntity;
 import com.iris.hai8tech.enums.District;
 import com.iris.hai8tech.enums.TypeCode;
 import com.iris.hai8tech.model.dto.BuildingDTO;
@@ -74,6 +75,8 @@ public class BuildingController {
     @GetMapping("/admin/building-edit")// ModelAttribute nếu href 3 cấp là k nhận
     public ModelAndView buildingEdit(@ModelAttribute("building") BuildingDTO buildingDTO, HttpServletRequest request) {
         ModelAndView mav = new ModelAndView("admin/building/edit");
+
+        mav.addObject("buildingEdit", new BuildingDTO());
         mav.addObject("districts", District.dicstrictMap());
         mav.addObject("typeCodes", TypeCode.typeCodeMap());
 //        mav.addObject("building", buildingDTO);
@@ -81,21 +84,15 @@ public class BuildingController {
     }
 
     @GetMapping("/admin/building-edit-{id}")// ModelAttribute nếu href 3 cấp là k nhận
-    public ModelAndView buildingEdit(@PathVariable("id") Long Id, HttpServletRequest request) {
+    public ModelAndView buildingEdit(@PathVariable("id") Long id, HttpServletRequest request) {
         ModelAndView mav = new ModelAndView("admin/building/edit");
 
-        BuildingDTO buildingDTO = new BuildingDTO();
-        mav.addObject("building", buildingDTO);
-        buildingDTO.setId(1L);
-        buildingDTO.setName("Tòa nhà Alpha");
-        buildingDTO.setNumberOfBasement(2L);
-        buildingDTO.setManagerName("Nguyễn Văn An");
-        buildingDTO.setManagerPhone("0901234567");
-        buildingDTO.setFloorArea(800L);
+        BuildingDTO buildingDTO = buildingService.findById(id);
 
-        List<BuildingDTO> reponseList = new ArrayList<>();
-        reponseList.add(buildingDTO);
-        mav.addObject("reponseList", reponseList);
+        mav.addObject("districts", District.dicstrictMap());
+        mav.addObject("typeCodes", TypeCode.typeCodeMap());
+        mav.addObject("buildingEdit", buildingDTO);
         return mav;
+        
     }
 }

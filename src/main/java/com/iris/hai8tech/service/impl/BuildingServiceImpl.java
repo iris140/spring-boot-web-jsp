@@ -5,6 +5,7 @@ import com.iris.hai8tech.converter.BuildingConvertor;
 import com.iris.hai8tech.converter.BuildingSearchBuilderConvertor;
 import com.iris.hai8tech.entity.BuildingEntity;
 import com.iris.hai8tech.entity.UserEntity;
+import com.iris.hai8tech.model.dto.AssignmentBuildingDTO;
 import com.iris.hai8tech.model.dto.BuildingDTO;
 import com.iris.hai8tech.model.request.BuildingSearchRequest;
 import com.iris.hai8tech.model.response.BuildingSearchResponse;
@@ -17,6 +18,7 @@ import com.iris.hai8tech.service.BuildingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
@@ -37,11 +39,6 @@ public class BuildingServiceImpl implements BuildingService {
 
     @Autowired
     private BuildingConvertor buildingConvertor;
-
-    @Override
-    public List<BuildingSearchResponse> findAll(BuildingSearchResponse buildingSearchReponse, Pageable pageable) {
-        return Collections.emptyList();
-    }
 
     @Override
     public List<BuildingSearchResponse> findAll(BuildingSearchRequest buildingSearchRequest, Pageable pageable) {
@@ -96,18 +93,25 @@ public class BuildingServiceImpl implements BuildingService {
     }
 
     @Override
+    @Transactional
     public void deleteBuilding(Long[] ids) {
-
+//        BuildingEntity buildingEntity = buildingRepository.findById(ids[0]).orElse(null);
+        buildingRepository.deleteByIdIn(ids);
     }
 
     @Override
     public BuildingDTO addOrUpdateBuilding(BuildingDTO buildingDTO) {
-        return null;
+
+    	BuildingEntity buildingEntity = buildingConvertor.toBuildingEnity(buildingDTO);
+    	buildingRepository.save(buildingEntity);
+        return buildingDTO;
     }
 
     @Override
     public BuildingDTO findById(Long id) {
-        return null;
+        BuildingEntity buildingEntity = buildingRepository.findById(id).orElse(null);
+        BuildingDTO buildingDTO = buildingConvertor.toBuildingDTO(buildingEntity);
+        return buildingDTO;
     }
 
     @Override
@@ -128,5 +132,22 @@ public class BuildingServiceImpl implements BuildingService {
         return buildingRepositoryCustom.countTotalItem(
                 buildingSearchBuilder
         );
+    }
+
+    @Override
+    public AssignmentBuildingDTO addOrUpdateAssignmentBuilding(AssignmentBuildingDTO assignmentBuildingDTO) {
+
+        BuildingEntity buildingEntity = buildingRepository.findById(assignmentBuildingDTO.getBuildingId()).get();
+        List<UserEntity> staffs = userRepository.findByIdIn(assignmentBuildingDTO.getStaffs());
+//        List<Long> staffs = assignmentBuildingDTO.getStaffs();
+//
+//        for (Long staffId : staffs) {
+//            UserEntity userEntity = userRepository.findById(staffId).get();
+//            userEntities.add(userEntity);
+//        }
+        buildingEntity.setUserEntities(staffs);
+        buildingRepository.save(buildingEntity);
+
+        return assignmentBuildingDTO;
     }
 }

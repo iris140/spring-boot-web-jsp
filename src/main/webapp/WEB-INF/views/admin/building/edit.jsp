@@ -6,7 +6,7 @@
 <%@ include file="/common/taglib.jsp" %>
 
 <c:set var="editMode"
-       value="${not empty building && not empty building.id}"/>
+       value="${not empty buildingEdit && not empty buildingEdit.id}"/>
 
 <!DOCTYPE html>
 <html lang="vi">
@@ -278,7 +278,11 @@
 <!-- =============================
      FORM
      ============================= -->
-
+<div id="building-message"
+     class="alert"
+     role="alert"
+     style="display: none;">
+</div>
 <div class="building-form-panel">
 
 
@@ -293,16 +297,16 @@
 
     <div class="building-form-body">
 
-        <form:form modelAttribute="building" id="form-edit" method="GET">
+        <form:form modelAttribute="buildingEdit" id="form-edit" method="GET">
 
-            <c:if test="${editMode}">
+<%--            <c:if test="${editMode}">--%>
 
-                <input type="hidden"
-                       id="id"
-                       name="id"
-                       value="<c:out value='${building.id}'/>">
+<%--                <input type="hidden"--%>
+<%--                       id="id"--%>
+<%--                       name="id"--%>
+<%--                       value="<c:out value='${buildingEdit.id}'/>">--%>
 
-            </c:if>
+<%--            </c:if>--%>
 
 
             <!-- =================================
@@ -410,12 +414,8 @@
                             <label for="street">
                                 Đường
                             </label>
-
-                            <input type="text"
-                                   id="street"
-                                   name="street"
-                                   class="form-control"
-                                   value="">
+                            <form:input class="form-control"
+                                        path="street"/>
 
                         </div>
 
@@ -429,13 +429,8 @@
                             <label for="structure">
                                 Kết cấu
                             </label>
-
-                            <input type="text"
-                                   id="structure"
-                                   name="structure"
-                                   class="form-control"
-                                   value="">
-
+                            <form:input class="form-control"
+                                        path="structure"/>
                         </div>
 
                     </div>
@@ -454,13 +449,8 @@
                             <label for="numberOfBasements">
                                 Số tầng hầm
                             </label>
-
-                            <input type="number"
-                                   id="numberOfBasements"
-                                   name="numberOfBasements"
-                                   class="form-control"
-                                   value="">
-
+                            <form:input class="form-control"
+                                        path="numberOfBasement"/>
                         </div>
 
                     </div>
@@ -473,13 +463,8 @@
                             <label for="floorArea">
                                 Diện tích sàn
                             </label>
-
-                            <input type="number"
-                                   id="floorArea"
-                                   name="floorArea"
-                                   class="form-control"
-                                   value="">
-
+                            <form:input class="form-control"
+                                        path="floorArea"/>
                         </div>
 
                     </div>
@@ -492,12 +477,8 @@
                             <label for="direction">
                                 Hướng
                             </label>
-
-                            <input type="text"
-                                   id="direction"
-                                   name="direction"
-                                   class="form-control"
-                                   value="">
+                            <form:input class="form-control"
+                                        path="direction"/>
 
                         </div>
 
@@ -511,12 +492,8 @@
                             <label for="rank">
                                 Hạng
                             </label>
-
-                            <input type="text"
-                                   id="rank"
-                                   name="rank"
-                                   class="form-control"
-                                   value="">
+                            <form:input class="form-control"
+                                        path="level"/>
 
                         </div>
 
@@ -536,12 +513,13 @@
                             <label for="rentArea">
                                 Diện tích thuê
                             </label>
-
-                            <input type="text"
+                            <form:input class="form-control"
+                                        path="rentArea"/>
+                            <!-- <input type="text"
                                    id="rentArea"
                                    name="rentArea"
                                    class="form-control"
-                                   value="">
+                                   value=""> -->
 
                         </div>
 
@@ -555,13 +533,8 @@
                             <label for="rentPrice">
                                 Giá thuê
                             </label>
-
-                            <input type="number"
-                                   id="rentPrice"
-                                   name="rentPrice"
-                                   class="form-control"
-                                   value="">
-
+                            <form:input class="form-control"
+                                        path="rentPrice"/>
                         </div>
 
                     </div>
@@ -575,12 +548,8 @@
                     <label for="priceDescription">
                         Mô tả giá
                     </label>
-
-                    <input type="text"
-                           id="priceDescription"
-                           name="priceDescription"
-                           class="form-control"
-                           value="">
+                    <form:input class="form-control"
+                                path="rentPriceDescription"/>
 
                 </div>
 
@@ -612,13 +581,8 @@
                             <label for="serviceFee">
                                 Phí dịch vụ
                             </label>
-
-                            <input type="number"
-                                   id="serviceFee"
-                                   name="serviceFee"
-                                   class="form-control"
-                                   value="">
-
+                            <form:input class="form-control"
+                                        path="serviceFee"/>
                         </div>
 
                     </div>
@@ -631,13 +595,8 @@
                             <label for="parkingFee">
                                 Phí ô tô
                             </label>
-
-                            <input type="number"
-                                   id="parkingFee"
-                                   name="parkingFee"
-                                   class="form-control"
-                                   value="">
-
+                            <form:input class="form-control"
+                                        path="carFee"/>
                         </div>
 
                     </div>
@@ -650,12 +609,8 @@
                             <label for="motorcycleFee">
                                 Phí mô tô
                             </label>
-
-                            <input type="number"
-                                   id="motorcycleFee"
-                                   name="motorcycleFee"
-                                   class="form-control"
-                                   value="">
+                            <form:input class="form-control"
+                                        path="motorbikeFee"/>
 
                         </div>
 
@@ -669,12 +624,8 @@
                             <label for="overtimeFee">
                                 Phí ngoài giờ
                             </label>
-
-                            <input type="number"
-                                   id="overtimeFee"
-                                   name="overtimeFee"
-                                   class="form-control"
-                                   value="">
+                            <form:input class="form-control"
+                                        path="overtimeFee"/>
 
                         </div>
 
@@ -694,12 +645,8 @@
                             <label for="electricityFee">
                                 Tiền điện
                             </label>
-
-                            <input type="number"
-                                   id="electricityFee"
-                                   name="electricityFee"
-                                   class="form-control"
-                                   value="">
+                            <form:input class="form-control"
+                                        path="electricityFee"/>
 
                         </div>
 
@@ -713,7 +660,8 @@
                             <label for="depositFee">
                                 Đặt cọc
                             </label>
-
+                                <%--                            <form:input class="form-control"--%>
+                                <%--                                        path="street"/>--%>
                             <input type="text"
                                    id="depositFee"
                                    name="depositFee"
@@ -732,7 +680,8 @@
                             <label for="paymentFee">
                                 Thanh toán
                             </label>
-
+                                <%--                            <form:input class="form-control"--%>
+                                <%--                                        path="street"/>--%>
                             <input type="text"
                                    id="paymentFee"
                                    name="paymentFee"
@@ -751,7 +700,8 @@
                             <label for="commissionFee">
                                 Phí môi giới
                             </label>
-
+                                <%--                            <form:input class="form-control"--%>
+                                <%--                                        path="street"/>--%>
                             <input type="number"
                                    id="commissionFee"
                                    name="commissionFee"
@@ -790,15 +740,11 @@
 
                         <div class="form-group">
 
-                            <label for="leaseTerm">
+                            <label for="leaseterm">
                                 Thời hạn thuê
                             </label>
-
-                            <input type="text"
-                                   id="leaseTerm"
-                                   name="leaseTerm"
-                                   class="form-control"
-                                   value="">
+                            <form:input class="form-control"
+                                        path="leaseTerm"/>
 
                         </div>
 
@@ -812,12 +758,8 @@
                             <label for="decorationTime">
                                 Thời gian trang trí
                             </label>
-
-                            <input type="text"
-                                   id="decorationTime"
-                                   name="decorationTime"
-                                   class="form-control"
-                                   value="">
+                            <form:input class="form-control"
+                                        path="decorationTime"/>
 
                         </div>
 
@@ -854,12 +796,8 @@
                             <label for="managerName">
                                 Tên quản lý
                             </label>
-
-                            <input type="text"
-                                   id="managerName"
-                                   name="managerName"
-                                   class="form-control"
-                                   value="">
+                            <form:input class="form-control"
+                                        path="managerName"/>
 
                         </div>
 
@@ -873,13 +811,8 @@
                             <label for="managerPhone">
                                 SĐT quản lý
                             </label>
-
-                            <input type="text"
-                                   id="managerPhone"
-                                   name="managerPhone"
-                                   class="form-control"
-                                   value="">
-
+                            <form:input class="form-control"
+                                        path="managerPhone"/>
                         </div>
 
                     </div>
@@ -894,41 +827,9 @@
                         Loại tòa nhà
                     </label>
 
-
                     <div class="building-types">
 
-                        <label class="checkbox-inline">
-
-                            <input type="checkbox"
-                                   name="typeCode"
-                                   value="noi-that">
-
-                            Nội thất
-
-                        </label>
-
-
-                        <label class="checkbox-inline">
-
-                            <input type="checkbox"
-                                   name="typeCode"
-                                   value="nguyen-can">
-
-                            Nguyên căn
-
-                        </label>
-
-
-                        <label class="checkbox-inline">
-
-                            <input type="checkbox"
-                                   name="typeCode"
-                                   value="tang-tret">
-
-                            Tầng trệt
-
-                        </label>
-
+                        <form:checkboxes class="search-checkbox" items="${typeCodes}" path="typeCode"/>
                     </div>
 
                 </div>
@@ -956,7 +857,6 @@
                     <label for="notes">
                         Ghi chú
                     </label>
-
                     <textarea id="notes"
                               name="notes"
                               class="form-control"
@@ -1045,6 +945,7 @@
         var data = {};
         var typeCodes = [];
         var formData = $('#form-edit').serializeArray();
+
         $.each(formData, function (i, field) {
             if (field.name === 'typeCode') {
                 typeCodes.push(field.value);
@@ -1052,13 +953,17 @@
                 data["" + field.name + ""] = field.value;
             }
         });
-        data['typeCodes'] = typeCodes;
+        data['typeCode'] = typeCodes;
         console.log("OK")
-        if (typeCodes != '') {
-            saveBuilding(data);
-        } else {
-            window.location.href= "<c:url value="/admin/building-edit?typeCodes=require"/>";
+        if (typeCodes.length === 0) {
+            showBuildingMessage(
+                "Vui lòng chọn ít nhất một loại tòa nhà!",
+                false
+            );
+            return;
         }
+
+        saveBuilding(data);
 
     });
 
@@ -1071,14 +976,39 @@
             contentType: "application/json",
             dataType: "json",
             success: function (response) {
-                console.log("Thêm tòa nhà thành công");
-                // $("#h11").html("Thêm tòa nhà thành công");
+                var message = ${editMode}
+                    ? "Cập nhật tòa nhà thành công!"
+                    : "Thêm tòa nhà thành công!";
+
+                showBuildingMessage(message, true);
             },
             error: function (response) {
                 console.log("Thêm tòa nhà thất bại");
+
+                var message = ${editMode}
+                    ? 'Cập nhật tòa nhà thất bại!'
+                    : 'Thêm tòa nhà thất bại!';
+
+                showBuildingMessage(message, false);
                 // $("#h11").html("Thêm tòa nhà thất bại");
             }
         });
+    }
+
+    // Hàm hiển thị thông báo dùng chung
+    function showBuildingMessage(message, isSuccess) {
+
+        var $message = $('#building-message');
+
+        $message
+            .removeClass('alert-success alert-danger')
+            .addClass(isSuccess ? 'alert-success' : 'alert-danger')
+            .text(message)
+            .show();
+
+        $('html, body').animate({
+            scrollTop: $message.offset().top - 80
+        }, 300);
     }
 </script>
 </body>

@@ -1,5 +1,7 @@
 package com.iris.hai8tech.model.dto;
 
+import javax.persistence.Column;
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,18 +12,40 @@ public class BuildingDTO extends AbstractDTO {
     private Long floorArea;
     private String district;
     private String ward;
+    private String structure;
     private String street;
     private Long numberOfBasement;
     private String direction;
     private Long level;
+    private String serviceFee;
+    private String carFee;
+    private String motorbikeFee;
+    private String overtimeFee;
+    private String electricityFee;
+    private String deposit;
+    private String payment;
+    private String leaseTerm;
+    private String decorationTime;
+    private BigDecimal brokerageFee;
     private Long areaFrom;
     private Long areaTo;
-    private Long rentPriceFrom;
-    private Long rentPriceTo;
+    private String rentPriceDescription;
+    private Long rentPrice;
     private String managerName;
     private String managerPhone;
     private Long staffId;
+    private String rentArea;
     private List<String> typeCode;
+    
+    
+    public String getRentArea() {
+		return rentArea;
+	}
+
+	public void setRentArea(String rentArea) {
+		this.rentArea = rentArea;
+	}
+
 
     public String getName() {
         return name;
@@ -53,6 +77,98 @@ public class BuildingDTO extends AbstractDTO {
 
     public void setWard(String ward) {
         this.ward = ward;
+    }
+
+    public String getServiceFee() {
+        return serviceFee;
+    }
+
+    public void setServiceFee(String serviceFee) {
+        this.serviceFee = serviceFee;
+    }
+
+    public String getMotorbikeFee() {
+        return motorbikeFee;
+    }
+
+    public void setMotorbikeFee(String motorbikeFee) {
+        this.motorbikeFee = motorbikeFee;
+    }
+
+    public void setRentPrice(Long rentPrice) {
+        this.rentPrice = rentPrice;
+    }
+
+    public String getStructure() {
+        return structure;
+    }
+
+    public void setStructure(String structure) {
+        this.structure = structure;
+    }
+
+    public String getCarFee() {
+        return carFee;
+    }
+
+    public void setCarFee(String carFee) {
+        this.carFee = carFee;
+    }
+
+    public String getOvertimeFee() {
+        return overtimeFee;
+    }
+
+    public void setOvertimeFee(String overtimeFee) {
+        this.overtimeFee = overtimeFee;
+    }
+
+    public String getElectricityFee() {
+        return electricityFee;
+    }
+
+    public void setElectricityFee(String electricityFee) {
+        this.electricityFee = electricityFee;
+    }
+
+    public String getDeposit() {
+        return deposit;
+    }
+
+    public void setDeposit(String deposit) {
+        this.deposit = deposit;
+    }
+
+    public String getPayment() {
+        return payment;
+    }
+
+    public void setPayment(String payment) {
+        this.payment = payment;
+    }
+
+    public String getLeaseTerm() {
+        return leaseTerm;
+    }
+
+    public void setLeaseTerm(String leaseTerm) {
+        this.leaseTerm = leaseTerm;
+    }
+
+    public String getDecorationTime() {
+        return decorationTime;
+    }
+
+    public void setDecorationTime(String decorationTime) {
+        this.decorationTime = decorationTime;
+    }
+
+    public BigDecimal getBrokerageFee() {
+        return brokerageFee;
+    }
+
+    public void setBrokerageFee(BigDecimal brokerageFee) {
+        this.brokerageFee = brokerageFee;
     }
 
     public String getStreet() {
@@ -103,20 +219,20 @@ public class BuildingDTO extends AbstractDTO {
         this.areaTo = areaTo;
     }
 
-    public Long getRentPriceFrom() {
-        return rentPriceFrom;
+    public String getRentPriceDescription() {
+        return rentPriceDescription;
     }
 
-    public void setRentPriceFrom(Long rentPriceFrom) {
-        this.rentPriceFrom = rentPriceFrom;
+    public void setRentPriceDescription(String rentPriceDescription) {
+        this.rentPriceDescription = rentPriceDescription;
     }
 
-    public Long getRentPriceTo() {
-        return rentPriceTo;
+    public Long getRentPrice() {
+        return rentPrice;
     }
 
     public void setRentPriceTo(Long rentPriceTo) {
-        this.rentPriceTo = rentPriceTo;
+        this.rentPrice = rentPriceTo;
     }
 
     public String getManagerName() {

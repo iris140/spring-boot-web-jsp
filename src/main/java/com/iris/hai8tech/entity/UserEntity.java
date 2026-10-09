@@ -33,7 +33,7 @@ public class UserEntity {
             inverseJoinColumns = @JoinColumn(name = "role_id", nullable = false))
     private List<RoleEntity> roles = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "userEntities", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "userEntities", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST,  CascadeType.MERGE})
     List<BuildingEntity> buildingEntityList = new ArrayList<>();
 
     public List<BuildingEntity> getBuildingEntityList() {

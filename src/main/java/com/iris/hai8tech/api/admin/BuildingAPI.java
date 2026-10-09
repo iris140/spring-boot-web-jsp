@@ -5,6 +5,7 @@ import com.iris.hai8tech.model.dto.BuildingDTO;
 import com.iris.hai8tech.model.response.ResponseDTO;
 import com.iris.hai8tech.service.BuildingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -19,13 +20,16 @@ public class BuildingAPI {
 
     @PostMapping
     public BuildingDTO addOrUpdateBuilding(@RequestBody BuildingDTO buildingDTO) {
+
+        buildingService.addOrUpdateBuilding(buildingDTO);
         return buildingDTO;
     }
 
     @DeleteMapping("/{ids}")
-    public void deleteBuilding(@PathVariable List<Long> ids) {
+    public ResponseEntity<Void> deleteBuilding(@PathVariable("ids") Long[] ids) {
         //xuống DB xóa building theo danh sách id
-        System.out.println("xóa thành công" + ids);
+        buildingService.deleteBuilding(ids);
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/{id}/staffs")
@@ -36,7 +40,7 @@ public class BuildingAPI {
 
     @PostMapping("/assignment")
     public void updateAssignmentBuilding(@RequestBody AssignmentBuildingDTO assignmentBuildingDTO){
-        System.out.println("ok");
+        buildingService.addOrUpdateAssignmentBuilding(assignmentBuildingDTO);
     }
 
 }

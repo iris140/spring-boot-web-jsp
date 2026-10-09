@@ -1,5 +1,4 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="fprm" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8"
          pageEncoding="UTF-8"
          language="java" %>
@@ -879,7 +878,7 @@
                         <button type="button"
                                 class="btn btn-danger btn-xs"
                                 title="Xóa"
-                                onclick="deleteBuilding(${buildingList.id})">
+                                onclick="deleteBuilding(${tableList.id})">
 
                             <span class="glyphicon glyphicon-trash"></span>
 
@@ -1152,21 +1151,27 @@
 
                 console.log('DELETE CLICK');
 
-                var buildingIds = $('#buildingTable')
-                    .find('input[type="checkbox"]:checked')
-                    .map(function () {
-                        return $(this).val();
-                    })
-                    .get();
+                // var buildingIds = $('#buildingTable')
+                //     .find('input[type="checkbox"]:checked')
+                //     .map(function () {
+                //         return $(this).val();
+                //     })
+                //     .get();
 
-                console.log('buildingIds:', buildingIds);
+                var ids = [];
 
-                if (buildingIds.length === 0) {
+                $('input[name="checkList"]:checked').each(function () {
+                    ids.push($(this).val());
+                });
+
+                console.log('buildingIds:', ids);
+
+                if (ids.length === 0) {
                     alert('Vui lòng chọn tòa nhà cần xóa');
                     return;
                 }
 
-                deleteBuildings(buildingIds);
+                deleteBuildings(ids);
 
             });
 
@@ -1205,7 +1210,7 @@
                     error: function (xhr) {
 
                         console.info("Giao không thành công");
-                        window.location.href = "<c:url value="/admin/building-list?message=error"/> "
+                        window.location.href = "<c:url value="/admin/building-list?message=error"/>"
                         console.log("Status:", xhr.status);
                         console.log("Response:", xhr.responseText);
 
@@ -1289,7 +1294,16 @@
     // DELETE BUILDINGS
     // ==============================
     function deleteBuildings(data) {
+        if (!Array.isArray(data) || data.length === 0) {
+            return;
+        }
 
+        var message = 'Bạn có chắc chắn muốn xóa '
+            + data.length + ' tòa nhà không?';
+
+        if (!confirm(message)) {
+            return;
+        }
         console.log('DELETE DATA:', data);
 
         $.ajax({
@@ -1305,13 +1319,14 @@
             dataType: "json",
 
             success: function (response) {
-
+                alert('Xóa tòa nhà thành công!');
                 console.log("Xóa tòa nhà thành công");
-
+// Tai lai giao dien sau khi xoa
+                window.location.reload();
             },
 
             error: function (xhr) {
-
+                alert('Xóa thất bại! Mã lỗi: ' + xhr.status);
                 console.log("Xóa tòa nhà thất bại");
 
                 console.log("Status:", xhr.status);
